@@ -3,6 +3,8 @@ import { styled, alpha } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -43,6 +45,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Navbar = ({ onLogoClick }) => {
+  const navigate = useNavigate();
+  const cartItems = useSelector((state) => state.cart.items);
+  const totalItems = cartItems.reduce(
+    (sum, item) => sum + item.quantity,
+    0
+  );
+
   return (
     <AppBar position="static" color="primary">
       <Toolbar>
@@ -61,7 +70,7 @@ const Navbar = ({ onLogoClick }) => {
             cursor: "pointer",
             "&:hover": { opacity: 0.8 },
           }}
-          onClick={onLogoClick}
+          onClick={() => navigate("/")}
         >
           E-Shop
         </Typography>
@@ -78,8 +87,8 @@ const Navbar = ({ onLogoClick }) => {
 
         {/* Cart + Login Buttons */}
         <Box sx={{ display: "flex", gap: 3 }}>
-          <IconButton size="large" color="inherit">
-            <Badge badgeContent={2} color="error">
+          <IconButton size="large" color="inherit" onClick={() => navigate("/cart")}>
+            <Badge badgeContent={totalItems} color="error">
               <ShoppingCartIcon />
             </Badge>
           </IconButton>

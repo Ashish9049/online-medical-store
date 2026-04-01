@@ -6,8 +6,11 @@ import {
   Button,
   Box,
 } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../cart/store/cartSlice";
 
 const ProductCard = ({ product }) => {
+  const dispatch = useDispatch();
   return (
     <Card
       sx={{
@@ -71,6 +74,7 @@ const ProductCard = ({ product }) => {
           size="small"
           fullWidth
           sx={{ mt: 0.5 }}
+          onClick={() => dispatch(addToCart(product))}
         >
           Add to Cart
         </Button>
