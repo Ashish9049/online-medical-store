@@ -1,12 +1,15 @@
 import Navbar from "./Navbar";
 import { Box } from "@mui/material";
+import { Outlet } from "react-router-dom";
 
-const MainLayout = ({ children }) => {
+const MainLayout = () => {
   return (
     <>
       <Navbar />
       <Box sx={{ mt: 1 }}>
-        <main>{children}</main>
+        <main>
+          <Outlet />
+        </main>
       </Box>
     </>
   );

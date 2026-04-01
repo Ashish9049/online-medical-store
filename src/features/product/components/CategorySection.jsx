@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const categories = [
   "Tablets",
@@ -9,7 +10,9 @@ const categories = [
   "Baby Care",
 ];
 
-const CategorySection = ({ selectedCategory, onCategoryChange }) => {
+const CategorySection = () => {
+  const navigate = useNavigate();
+
   return (
     <Box
       sx={{
@@ -23,7 +26,6 @@ const CategorySection = ({ selectedCategory, onCategoryChange }) => {
         sx={{
           display: "flex",
           justifyContent: "center",
-          alignItems: "center",
           gap: 4,
           flexWrap: "wrap",
         }}
@@ -31,13 +33,10 @@ const CategorySection = ({ selectedCategory, onCategoryChange }) => {
         {categories.map((category) => (
           <Typography
             key={category}
-            onClick={() => onCategoryChange(category)}
+            onClick={() => navigate(`/products/${category}`)}
             sx={{
-              fontSize: "0.95rem",
-              fontWeight: selectedCategory === category ? 700 : 500,
               cursor: "pointer",
-              color: selectedCategory === category ? "primary.main" : "#333",
-              textDecoration: selectedCategory === category ? "underline" : "none",
+              fontWeight: 500,
               "&:hover": {
                 color: "primary.main",
                 textDecoration: "underline",
